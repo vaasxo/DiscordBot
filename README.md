@@ -28,7 +28,8 @@ sau daca acea persoana nu poate fi data afara.
 Comenzile ce tin de muzica sunt implementate cu ajutorul bibliotecii LavaPlayer. Clasele folosite sunt:
 - Track Scheduler: organizarea pieselor ce vor fi "cantate"
 - AudioPlayerSendHandler: legatura dintre LavaPlayer si JDA cand se trimite audio intre bot si discord
-
+- GuildMusicManager: "manageriaza" player-ul muzical dintr-un server particular
+- PlayerManager: se ocupa de tot ce inseamna raspunderea mesajelor, selectarea server ului corect, apelarea track scheduler-ului corect etc.
 
 Exemplu functionalitati muzicale - LavaPLayer
 ![image](https://user-images.githubusercontent.com/59650692/119503635-dce7ce80-bd73-11eb-80b7-ef94fdbb42ed.png)
