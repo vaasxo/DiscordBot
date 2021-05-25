@@ -46,8 +46,7 @@ public class Play implements ICommand {
 			link="ytsearch:"+link;
 		}
 
-		PlayerManager.getInstance()
-				.loadAndPlay(channel, link);
+		PlayerManager.getInstance().loadAndPlay(channel, link);
 	}
 
 	@Override

@@ -30,9 +30,8 @@ public class Help implements ICommand {
 
 			builder.append("List of commands\n");
 
-			String prefix = getPrefix(guildID);
 			manager.getCommands().stream().map(ICommand::getName).forEach(
-					it-> builder.append("`").append(prefix).append(it).append("`\n")
+					it-> builder.append("`").append("<prefix>").append(it).append("`\n")
 			);
 
 			channel.sendMessage(builder.toString()).queue();
@@ -63,24 +62,5 @@ public class Help implements ICommand {
 	@Override
 	public List<String> getAliases(){
 		return Arrays.asList("commands", "cmd", "vommands", "comenzi");
-	}
-
-	private String getPrefix(long guildID){
-		try (final PreparedStatement preparedStatement = SQLiteDataSource
-				.getConnection()
-				// language=SQLite
-				.prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id = ?")) {
-
-			preparedStatement.setString(1, String.valueOf(guildID));
-
-			ResultSet resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()){
-				return resultSet.getString("prefix");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return "!";
 	}
 }
