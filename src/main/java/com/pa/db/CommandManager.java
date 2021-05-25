@@ -19,6 +19,9 @@ public class CommandManager {
 		addCommand(new Play());
 		addCommand(new Help(this));
 		addCommand(new Kick());
+		addCommand(new Webhook());
+		addCommand(new Joke());
+		addCommand(new SetPrefix());
 	}
 
 	private void addCommand(ICommand cmd) {
