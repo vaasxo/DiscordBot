@@ -9,10 +9,10 @@ public interface ICommand {
 	void handle(CommandContext context);
 
 	String getName();
-	
+
 	String getHelp();
 
-	default List<String> getAliases(){
+	default List<String> getAliases() {
 		return Collections.emptyList();
 	}
 
