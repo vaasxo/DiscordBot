@@ -1,4 +1,4 @@
-package com.pa.db;
+package com.pa.db.commands.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
@@ -10,8 +10,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TrackScheduler extends AudioEventAdapter {
 
-	private final AudioPlayer player;
-	private final BlockingQueue<AudioTrack> queue;
+	//This class helps schedule the tracks that the player will play
+	protected final AudioPlayer player;
+	protected final BlockingQueue<AudioTrack> queue;
 
 	public TrackScheduler(AudioPlayer player){
 		this.player=player;

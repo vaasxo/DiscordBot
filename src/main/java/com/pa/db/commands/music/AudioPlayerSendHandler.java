@@ -1,14 +1,14 @@
-package com.pa.db;
+package com.pa.db.commands.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.playback.MutableAudioFrame;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
-import org.jetbrains.annotations.Nullable;
 
 import java.nio.ByteBuffer;
 
 public class AudioPlayerSendHandler implements AudioSendHandler {
 
+	//This class is used as a bridge between LavaPlayer and JDA when sending music between bot and discord
 	private final AudioPlayer audioPlayer;
 	private final ByteBuffer buffer;
 	private final MutableAudioFrame frame;
@@ -19,7 +19,6 @@ public class AudioPlayerSendHandler implements AudioSendHandler {
 		this.frame = new MutableAudioFrame();
 		this.frame.setBuffer(buffer);
 	}
-
 
 	@Override
 	public boolean canProvide() {

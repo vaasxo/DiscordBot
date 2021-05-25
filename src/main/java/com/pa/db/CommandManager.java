@@ -1,6 +1,7 @@
 package com.pa.db;
 
 import com.pa.db.commands.*;
+import com.pa.db.commands.music.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.annotation.Nullable;
@@ -16,12 +17,17 @@ public class CommandManager {
 	public CommandManager() {
 		addCommand(new Ping());
 		addCommand(new Meme());
-		addCommand(new Play());
 		addCommand(new Help(this));
 		addCommand(new Kick());
 		addCommand(new Webhook());
 		addCommand(new Joke());
 		addCommand(new SetPrefix());
+		addCommand(new Join());
+		addCommand(new Play());
+		addCommand(new Stop());
+		addCommand(new Skip());
+		addCommand(new NowPlaying());
+		addCommand(new Leave());
 	}
 
 	private void addCommand(ICommand cmd) {
@@ -61,8 +67,6 @@ public class CommandManager {
 			CommandContext context = new CommandContext(event, args);
 
 			cmd.handle(context);
-		} else {
-			event.getChannel().sendMessage("Command not found!").queue();
 		}
 	}
 }

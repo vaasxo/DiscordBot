@@ -16,46 +16,45 @@ public class SQLiteDataSource {
 	private static final HikariConfig config = new HikariConfig();
 	private static final HikariDataSource ds;
 
-	static{
-		try{
+	static {
+		try {
 			final File dbFile = new File("database.db");
 
-			if(!dbFile.exists()){
-				if(dbFile.createNewFile()){
+			if (!dbFile.exists()) {
+				if (dbFile.createNewFile()) {
 					LOGGER.info("Created database file");
-				}
-				else{
+				} else {
 					LOGGER.info("Could not create database file");
 				}
 			}
-		} catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		config.setJdbcUrl("jdbc:sqlite:database.db");
 		config.setConnectionTestQuery("SELECT 1");
-		config.addDataSourceProperty("cachePrepStmts","true");
-		config.addDataSourceProperty("prepStmtCacheSize","250");
-		config.addDataSourceProperty("prepStmtCacheSqlLimit","2048");
+		config.addDataSourceProperty("cachePrepStmts", "true");
+		config.addDataSourceProperty("prepStmtCacheSize", "250");
+		config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 		ds = new HikariDataSource(config);
 
-		try(final Statement statement = getConnection().createStatement()){
+		try (final Statement statement = getConnection().createStatement()) {
 			// language=SQLite
 			statement.execute("CREATE TABLE IF NOT EXISTS guild_settings (" +
 					"id INTEGER PRIMARY KEY AUTOINCREMENT," +
 					"guild_id VARCHAR(20) NOT NULL," +
 					"prefix VARCHAR(10) NOT NULL DEFAULT '!'" +
 					");");
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private SQLiteDataSource(){
+	private SQLiteDataSource() {
 
 	}
 
-	public static Connection getConnection() throws SQLException{
+	public static Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}
 }

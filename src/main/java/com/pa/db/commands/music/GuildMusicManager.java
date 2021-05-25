@@ -1,10 +1,12 @@
-package com.pa.db;
+package com.pa.db.commands.music;
+
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 
 public class GuildMusicManager {
 
+	//This class helps manage the music player inside a specific Guild
 	public final AudioPlayer audioPlayer;
 	public final TrackScheduler scheduler;
 	private final AudioPlayerSendHandler sendHandler;

@@ -1,4 +1,4 @@
-package com.pa.db;
+package com.pa.db.commands.music;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
@@ -11,18 +11,20 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PlayerManager {
 
 	private static PlayerManager INSTANCE;
-	private final Map<Long, GuildMusicManager> musicManagers;
+	private final Map<Long, GuildMusicManager> musicManagers; //maps each guild to a music manager
 	private final AudioPlayerManager audioPlayerManager;
 
 	public PlayerManager(){
 		this.musicManagers = new HashMap<>();
 		this.audioPlayerManager = new DefaultAudioPlayerManager();
 
+		//teaches the player what a youtube video is
 		AudioSourceManagers.registerRemoteSources(this.audioPlayerManager);
 		AudioSourceManagers.registerLocalSource(this.audioPlayerManager);
 	}
@@ -37,6 +39,7 @@ public class PlayerManager {
 		});
 	}
 
+	//handles the reading and replying of/to play commands
 	public void loadAndPlay(TextChannel channel, String trackUrl){
 		final GuildMusicManager musicManager = this.getMusicManager(channel.getGuild());
 
@@ -57,16 +60,18 @@ public class PlayerManager {
 
 			@Override
 			public void playlistLoaded(AudioPlaylist playlist) {
-				for(AudioTrack track : playlist.getTracks()){
-					musicManager.scheduler.queue(track);
-				}
+				final List<AudioTrack> tracks=playlist.getTracks();
 
 				channel.sendMessage("Adding to queue: `")
+						.append(String.valueOf(tracks.size()))
+						.append("` tracks from playlist `")
 						.append(playlist.getName())
-						.append("` containing `")
-						.append(playlist.getTracks().toString())
 						.append("`")
 						.queue();
+
+				for(AudioTrack track:tracks){
+					musicManager.scheduler.queue(track);
+				}
 			}
 
 			@Override

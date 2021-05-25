@@ -38,7 +38,7 @@ public class Listener extends ListenerAdapter {
 			return;
 		}
 
-		final long guildID=event.getGuild().getIdLong();
+		final long guildID = event.getGuild().getIdLong();
 		prefix = getPrefix(guildID);
 		String raw = event.getMessage().getContentRaw();
 
@@ -66,19 +66,19 @@ public class Listener extends ListenerAdapter {
 				.getConnection()
 				//language=SQLite
 				.prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id=?")) {
-			preparedStatement.setString(1,String.valueOf(guildID));
+			preparedStatement.setString(1, String.valueOf(guildID));
 
-			try(final ResultSet resultSet = preparedStatement.executeQuery()){
-				if(resultSet.next()){
+			try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
 					return resultSet.getString("prefix");
 				}
 			}
 
-			try(final PreparedStatement insertStatement = SQLiteDataSource
+			try (final PreparedStatement insertStatement = SQLiteDataSource
 					.getConnection()
 					//language=SQLite
-					.prepareStatement("INSERT INTO guild_settings(guild_id) VALUES (?)")){
-				insertStatement.setString(1,String.valueOf(guildID));
+					.prepareStatement("INSERT INTO guild_settings(guild_id) VALUES (?)")) {
+				insertStatement.setString(1, String.valueOf(guildID));
 
 				insertStatement.execute();
 			}
