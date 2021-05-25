@@ -19,7 +19,7 @@ public class NowPlaying implements ICommand {
 		final GuildVoiceState selfVoiceState = self.getVoiceState();
 
 		if(!selfVoiceState.inVoiceChannel()){
-			channel.sendMessage("Please use the Join command first to get me into the voice channel!").queue();
+			channel.sendMessage("I am not in a voice channel, so no music is playing from me!").queue();
 			return;
 		}
 

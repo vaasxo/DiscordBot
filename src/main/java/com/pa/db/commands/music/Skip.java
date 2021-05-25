@@ -17,7 +17,7 @@ public class Skip implements ICommand {
 		final GuildVoiceState selfVoiceState = self.getVoiceState();
 
 		if(!selfVoiceState.inVoiceChannel()){
-			channel.sendMessage("Please use the Join command first to get me into the voice channel!").queue();
+			channel.sendMessage("I am not in a voice channel, so I have no music to skip!!").queue();
 			return;
 		}
 

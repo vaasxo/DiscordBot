@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings("ALL")
 public class Leave implements ICommand {
 
 	@Override
@@ -18,7 +18,7 @@ public class Leave implements ICommand {
 		final GuildVoiceState selfVoiceState = self.getVoiceState();
 
 		if(!selfVoiceState.inVoiceChannel()){
-			channel.sendMessage("Please use the Join command first to get me into the voice channel!").queue();
+			channel.sendMessage("I am not in a channel, so I can't leave one!").queue();
 			return;
 		}
 
